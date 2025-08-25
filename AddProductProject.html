@@ -4,53 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Add project</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container mt-5">
-<h2>Dynamic Product list </h2>
-<div class="card">
+    <h2>Dynamic Product list </h2>
 
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">200 taka </p>
-    <button onclick="this.parentElement.remove()" class="btn btn-danger">Delete</button>
-  </div>
+    <div id="productCard" class="card p-2">
+        <!-- Default product -->
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">200 taka</p>
+            <button onclick="this.parentElement.remove()" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <input id="pTitle" class="form-control mb-2" placeholder="Product title">
+        <input id="pPrice" type="number" class="form-control mb-2" placeholder="Product price">
+        <button onclick="addNewProduct()" class="btn btn-primary">Add Product</button>
+    </div>
 </div>
-<div class="mt-4">
-    <input id="pTitle" class="form-control" placeholder="Product title">
-    <input id="pPrice" type="number" class="form-control" placeholder="Product price">
-    <button class="btn btn-primary">Add Product</button>
-</div>
 
+<script>
+    function addNewProduct(){
+        let ProductTitle = document.getElementById('pTitle').value.trim();
+        let ProductPrice = document.getElementById('pPrice').value.trim();
 
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-
-    <script>
-        function addNewProduct(){
-            let ProductTitle
-
+        if(!ProductTitle || !ProductPrice){   
+            alert('Please enter product title and price');
+            return;
         }
-    </script>i
+
+        let productCard = document.getElementById('productCard');
+
+        productCard.innerHTML += `
+            <div class="card-body">
+                <h5 class="card-title">${ProductTitle}</h5>
+                <p class="card-text">${ProductPrice} taka</p>
+                <button onclick="this.parentElement.remove()" class="btn btn-danger">Delete</button>
+            </div>`;
+        
+        
+        document.getElementById('pTitle').value = "";
+        document.getElementById('pPrice').value = "";
+    }
+</script>
 </body>
 </html>
